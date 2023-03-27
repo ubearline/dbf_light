@@ -128,7 +128,11 @@ class Dbf(object):
 
             row_values = []
             for field in fields:
-                val = field.cast(fileobj.read(field.len))
+                val = None
+                try:
+                    val = field.cast(fileobj.read(field.len))
+                except:
+                    pass
                 row_values.append(val)
 
             yield cls_row(*row_values)
